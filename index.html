@@ -8,7 +8,7 @@
 </head>
 <body>
     <div style="width: 100%; display: flex; justify-content: center; align-items: center; height: 100vh">
-        <div>
+        <div id='content'>
             <h1 align="center">500</h1>
             <p align="center">Missing Telegram user data</p>
         </div>
@@ -17,6 +17,6 @@
 <script>
     const el = document.createElement('div')
     el.innerText=window.Telegram.WebApp.initData
-    document.body.append(el)
+    document.querySelector('#content').append(el)
 </script>
 </html>
