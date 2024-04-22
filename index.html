@@ -21,8 +21,10 @@
     el.innerText = WebApp.initData
     document.querySelector('#content').appendChild(el)
 
-    WebApp.MainButton.setParams(is_visible=True)
+    WebApp.MainButton.setText("Holaaa")
+    WebApp.MainButton.show()
     WebApp.MainButton.onClick(()=>alert('hola'))
-    WebApp.BackButton.setParams(is_visible=True)
+    WebApp.BackButton.setText('Back')
+    WebApp.BackButton.show()
 </script>
 </html>
