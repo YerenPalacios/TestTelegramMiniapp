@@ -8,18 +8,21 @@
 </head>
 <body>
     <div style="width: 100%; display: flex; justify-content: center; align-items: center; height: 100vh; color: var(--tg-theme-text-color)">
-        <div id='content' style="max-width: 100vw: overflow:hidden">
+        <div id='content' style="max-width: 100vw; overflow:hidden">
             <h1 align="center">500</h1>
             <p align="center">Missing Telegram user data</p>
-            <input type="text"><br>
-            <input type="button" value="?"><br> 
-            <button onclick="alert('Hola')">Click</button><br>
         </div>
     </div>
 </body>
 <script>
+    const WebApp = window.Telegram.WebApp
     const el = document.createElement('div')
-    el.innerText=window.Telegram.WebApp.initData
+    el.style.maxWidth = '100vh'
+    el.innerText = WebApp.initData
     document.querySelector('#content').appendChild(el)
+
+    WebApp.MainButton.setParams(is_visible=True)
+    WebApp.MainButton.onClick(()=>alert('hola'))
+    WebApp.BackButton.setParams(is_visible=True)
 </script>
 </html>
