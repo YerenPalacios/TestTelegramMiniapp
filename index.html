@@ -3,10 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <title>Document</title>
+    <style>
+        button{
+            line-height: 0 !important;
+        }
+        button:hover{
+            background-color: rgba(0,0,0,.05);
+        }
+    </style>
 </head>
-<body>
+<body class="p-2">
+    <div class="rounded-sm shadow-[0_2px_5px_0px_rgba(0,0,0,0.2)] p-5" style="background-color: var(--tg-theme-secondary-bg-color);">
+        <h3 class="text-lg font-bold" style="color: var(--tg-theme-text-color)">Calculo diferencial</h3>
+        <div class="flex justify-between items-center w-full">
+            <p class="block" style="color: var(--tg-theme-hint-color)">0 actividades en curso</p>
+            <button class="block font-bold w-8 h-8 rounded-full text-sm" style="color: var(--tg-theme-hint-color)">v</button>
+        </div>
+    </div>
+<br>
+    <div class="rounded-sm shadow-[0_2px_5px_0px_rgba(0,0,0,0.2)] p-5" style="background-color: var(--tg-theme-secondary-bg-color);">
+        <h3 class="text-lg font-bold" style="color: var(--tg-theme-text-color)">Calculo diferencial</h3>
+        <div class="flex justify-between items-center w-full">
+            <p class="block" style="color: var(--tg-theme-hint-color)">0 actividades en curso</p>
+            <button class="block font-bold w-8 h-8 rounded-full text-sm" style="color: var(--tg-theme-hint-color)">v</button>
+        </div>
+    </div>
+
     <div style="width: 100%; display: flex; justify-content: center; align-items: center; color: var(--tg-theme-text-color)">
         <div id='content' style="max-width: 100vw; overflow:hidden">
             <h1 align="center">500</h1>
@@ -24,7 +49,5 @@
     WebApp.MainButton.setText("Holaaa")
     WebApp.MainButton.show()
     WebApp.MainButton.onClick(()=>alert('hola'))
-    WebApp.BackButton.show()
-    WebApp.BackButton.onClick((()=>alert('Back')))
 </script>
 </html>
