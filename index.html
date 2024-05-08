@@ -6,30 +6,57 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <title>Document</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <style>
+        .material-symbols-outlined {
+            font-variation-settings:
+            'FILL' 0,
+            'wght' 400,
+            'GRAD' 0,
+            'opsz' 24
+        }
+        
         button{
             line-height: 0 !important;
+            transition: .5s ease;
         }
         button:hover{
             background-color: rgba(0,0,0,.05);
         }
+        .content{
+            height: 0;
+            overflow: hidden;
+            color: var(--tg-theme-text-color);
+            transition: height 2s;
+            background-color: var(--tg-theme-bg-color);
+        }
+        .open{
+            height: auto;
+        }
     </style>
+    
 </head>
 <body class="p-2">
     <div class="rounded-sm shadow-[0_2px_5px_0px_rgba(0,0,0,0.2)] p-5" style="background-color: var(--tg-theme-secondary-bg-color);">
         <h3 class="text-lg font-bold" style="color: var(--tg-theme-text-color)">Calculo diferencial</h3>
         <div class="flex justify-between items-center w-full">
             <p class="block" style="color: var(--tg-theme-hint-color)">0 actividades en curso</p>
-            <button class="block font-bold w-8 h-8 rounded-full text-sm" style="color: var(--tg-theme-hint-color)">v</button>
+            <button onclick="toggleContent(this)" class="block font-bold w-8 h-8 rounded-full text-sm" style="color: var(--tg-theme-hint-color)">
+                <span class="material-symbols-outlined">expand_more</span>
+            </button>
         </div>
+        <div class="content">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum earum, ratione explicabo alias praesentium fugiat hic totam consectetur beatae est id eius adipisci aliquam voluptatibus nemo nesciunt minus sapiente commodi?</div>
     </div>
 <br>
     <div class="rounded-sm shadow-[0_2px_5px_0px_rgba(0,0,0,0.2)] p-5" style="background-color: var(--tg-theme-secondary-bg-color);">
         <h3 class="text-lg font-bold" style="color: var(--tg-theme-text-color)">Calculo diferencial</h3>
         <div class="flex justify-between items-center w-full">
             <p class="block" style="color: var(--tg-theme-hint-color)">0 actividades en curso</p>
-            <button class="block font-bold w-8 h-8 rounded-full text-sm" style="color: var(--tg-theme-hint-color)">v</button>
+            <button onclick="toggleContent(this)" class="block font-bold w-8 h-8 rounded-full text-sm" style="color: var(--tg-theme-hint-color)">
+                <span  class="material-symbols-outlined">expand_more</span>
+            </button>
         </div>
+        <div class="content">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum earum, ratione explicabo alias praesentium fugiat hic totam consectetur beatae est id eius adipisci aliquam voluptatibus nemo nesciunt minus sapiente commodi?</div>
     </div>
 
     <div style="width: 100%; display: flex; justify-content: center; align-items: center; color: var(--tg-theme-text-color)">
@@ -39,6 +66,7 @@
         </div>
     </div>
 </body>
+
 <script>
     const WebApp = window.Telegram.WebApp
     const el = document.createElement('div')
@@ -49,5 +77,16 @@
     WebApp.MainButton.setText("Holaaa")
     WebApp.MainButton.show()
     WebApp.MainButton.onClick(()=>alert('hola'))
+
+    function toggleContent(e){
+        var content =  e.parentElement.parentElement.querySelector(".content")
+        if (content.classList.contains('open')){
+            e.style.transform = "rotate(0deg)"
+            content.classList.remove('open')
+        }else{
+            e.style.transform = "rotate(180deg)"
+            content.classList.add('open')
+        }
+    }
 </script>
 </html>
