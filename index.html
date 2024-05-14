@@ -135,5 +135,21 @@
             content.classList.add('open')
         }
     }
+
+    fetch("https://bot-qegi.onrender.com/process").then(res => res.json()).then(data=>{
+        data.forEach(i=>{
+            item = document.createElement('div')
+            date = new Date(i.created_at)
+            item.innerHTML = `
+            <div class="rounded-sm mb-2 shadow-[0_2px_5px_0px_rgba(0,0,0,0.2)] p-5 flex gap-5 items-center" style="background-color: var(--tg-theme-secondary-bg-color);">
+                <span class="loader shrink-0"></span>
+                <div>
+                    <h3 class="text-md" style="color: var(--tg-theme-text-color)">${i.name} ${i.duration}s ${date.getHours()-5}:${date.getMinutes()} </h3>
+                </div>
+            </div>
+            `
+            document.body.appendChild(item)
+        })
+    })
 </script>
 </html>
