@@ -27,8 +27,6 @@
             height: 0;
             overflow: hidden;
             color: var(--tg-theme-text-color);
-            transition: height 2s;
-            background-color: var(--tg-theme-bg-color);
         }
         .open{
             height: auto;
@@ -113,16 +111,16 @@
     // WebApp.MainButton.show()
     // WebApp.MainButton.onClick(()=>alert('hola'))
 
-    // function toggleContent(e){
-    //     var content =  e.parentElement.parentElement.querySelector(".content")
-    //     if (content.classList.contains('open')){
-    //         e.style.transform = "rotate(0deg)"
-    //         content.classList.remove('open')
-    //     }else{
-    //         e.style.transform = "rotate(180deg)"
-    //         content.classList.add('open')
-    //     }
-    // }
+    function toggleContent(e){
+        var content =  e.parentElement.parentElement.parentElement.querySelector(".content")
+        if (content.classList.contains('open')){
+            e.style.transform = "rotate(0deg)"
+            content.classList.remove('open')
+        }else{
+            e.style.transform = "rotate(180deg)"
+            content.classList.add('open')
+        }
+    }
 
     fetch("https://bot-qegi.onrender.com/process").then(res => res.json()).then(data=>{
         data.forEach(i=>{
@@ -130,12 +128,18 @@
             date = new Date(i.created_at)
             const localDate = new Date(date.getTime() - (date.getTimezoneOffset() * 60000));
             item.innerHTML = `
-            <div class="rounded-sm mb-2 shadow-[0_2px_5px_0px_rgba(0,0,0,0.2)] p-5 flex gap-5 items-center" style="background-color: var(--tg-theme-secondary-bg-color);">
+            <div class="rounded-sm mb-2 shadow-[0_2px_5px_0px_rgba(0,0,0,0.2)] p-5" style="background-color: var(--tg-theme-secondary-bg-color);">
+                <div class="flex gap-5 items-center">
                 ${i.status===0?'<span class="loader shrink-0"></span>':i.status===1?'<img class="w-8 p-1" src="check.png" alt="">':'<img class="w-8 p-1" src="cancel.png" alt="">'}
-                <div>
-                    <h3 class="text-md" style="color: var(--tg-theme-text-color)">${i.name}</h3>
-                    <p class="text-sm" style="color: var(--tg-theme-hint-color)"> ${localDate.toLocaleTimeString()} ${i.duration}s</p>
+                <div class="flex items-center justify-between w-full" >
+                    <div class="block">
+                        <h3 class="text-md" style="color: var(--tg-theme-text-color)">${i.name}</h3>
+                        <p class="text-sm" style="color: var(--tg-theme-hint-color)"> ${localDate.toLocaleTimeString()} ${i.duration}s</p>
+                    </div>
+                    ${i.reason?'<button onclick="toggleContent(this)" class="block font-bold w-8 h-8 rounded-full text-sm" style="color: var(--tg-theme-hint-color)"><span class="material-symbols-outlined">expand_more</span></button>': ''}
                 </div>
+                </div>
+                <div class="content"><br>${i.reason}</div>
             </div>
             `
             processes.appendChild(item)
