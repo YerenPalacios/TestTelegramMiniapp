@@ -33,10 +33,57 @@
         .open{
             height: auto;
         }
+
+        .loader {
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--tg-theme-hint-color);
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            position: relative;
+            animation: pulse 1s linear infinite;
+            }
+            .loader:after {
+            content: '';
+            position: absolute;
+            width: 32px;
+            height: 32px;
+            border: 3px solid var(--tg-theme-hint-color);
+            border-radius: 50%;
+            display: inline-block;
+            box-sizing: border-box;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            animation: scaleUp 1s linear infinite;
+            }
+
+            @keyframes scaleUp {
+            0% { transform: translate(-50%, -50%) scale(0) }
+            60% , 100% { transform: translate(-50%, -50%)  scale(1)}
+            }
+            @keyframes pulse {
+            0% , 60% , 100%{ transform:  scale(1) }
+            80% { transform:  scale(1.2)}
+            }
     </style>
     
 </head>
 <body class="p-2">
+    <div class="rounded-sm shadow-[0_2px_5px_0px_rgba(0,0,0,0.2)] p-5 flex gap-5 items-center" style="background-color: var(--tg-theme-secondary-bg-color);">
+        <span class="loader shrink-0"></span>
+        <div>
+            <h3 class="text-lg font-bold" style="color: var(--tg-theme-text-color)">Calculo diferencial</h3>
+            <div class="flex justify-between items-center w-full">
+                <p class="block" style="color: var(--tg-theme-hint-color)">0 actividades en curso</p>
+                <button onclick="toggleContent(this)" class="block font-bold w-8 h-8 rounded-full text-sm" style="color: var(--tg-theme-hint-color)">
+                    <span class="material-symbols-outlined">expand_more</span>
+                </button>
+            </div>
+            <div class="content">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolorum earum, ratione explicabo alias praesentium fugiat hic totam consectetur beatae est id eius adipisci aliquam voluptatibus nemo nesciunt minus sapiente commodi?</div>
+        </div>
+    </div>
     <div class="rounded-sm shadow-[0_2px_5px_0px_rgba(0,0,0,0.2)] p-5" style="background-color: var(--tg-theme-secondary-bg-color);">
         <h3 class="text-lg font-bold" style="color: var(--tg-theme-text-color)">Calculo diferencial</h3>
         <div class="flex justify-between items-center w-full">
