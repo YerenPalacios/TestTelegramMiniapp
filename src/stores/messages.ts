@@ -1,36 +1,42 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
+import { useFetch } from '@vueuse/core'
+
 import { COURSES_URL } from '@/constants'
 import { useAlertStore } from './alert'
+
 
 export const useMessagesStore = defineStore('messages', () => {
   const { addAlert } = useAlertStore()
 
-  const courses = ref<any>([])
-  const content_messages = ref<any>([])
+  const courses = ref<CourseMessage[]>([])
+  const content_messages = ref<Record<string, ContentMessage>>({})
   const loadingMessage = ref(false)
   const loadingCourses = ref(false)
 
-  function getMessage(index: number, link: string) {
-    content_messages.value[link] = {}
+  async function getMessage(index: number, link: string) {
     loadingMessage.value = true
-    fetch(`${COURSES_URL}?course_index=${index}&message_url=${encodeURIComponent(link)}`)
-      .then((res) => res.json())
-      .then((data) => {
-        content_messages.value.push({ ...data, link })
-      })
-      .catch((e) => addAlert(e.toLocaleString()))
-      .finally(() => (loadingMessage.value = false))
+    const { error, data } = await useFetch(
+      `${COURSES_URL}?course_index=${index}&message_url=${encodeURIComponent(link)}`
+    ).json()
+
+    content_messages.value[link] = data.value
+    if (error.value) {
+      addAlert(error.value.toLocaleString())
+    }
+
+    loadingMessage.value = false
   }
 
-  function getCoursesWithMessages() {
+  async function getCoursesWithMessages() {
     loadingCourses.value = true
-    fetch(COURSES_URL)
-      .then((res) => res.json())
-      .then((data) => (courses.value = data))
-      .catch((e) => addAlert(e.toLocaleString()))
-      .finally(() => (loadingCourses.value = false))
+    const { error, data } = await useFetch(COURSES_URL).json()
+    if (error.value) {
+      addAlert(error.value.toLocaleString())
+    }
+    courses.value = data.value
+    loadingCourses.value = false
   }
 
   return {
